@@ -1,0 +1,46 @@
+def add_time(begin, end, day):
+    
+    
+
+    week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+
+
+    added_h = int(begin.split()[0].split(sep=':')[0]) + int(end.split(sep=':')[0])
+    added_m = int(begin.split()[0].split(sep=':')[1]) + int(end.split(sep=':')[1])
+
+    if added_m >= 60:
+        added_h = added_h + 1
+        added_m = added_m - 60
+
+    if added_m== 0:
+        added_m = '00'
+
+# convert to 24h :
+    
+    if added_h <= 48:
+        timeconvert_added_h = added_h - 24
+    else:
+        timeconvert_added_h = added_h - int(added_h/24)*24
+    
+    if (timeconvert_added_h >=12) & (timeconvert_added_h <= 23):
+        ampm = 'PM'
+        timeconvert_added_h = timeconvert_added_h - 12
+    else:
+        ampm = 'AM'
+    
+
+    n_days =int(added_h/24)
+    d = week.index(day)
+
+    if n_days == 1:
+        n_days = f'{week[d]}, next day' 
+    else:
+        d = week.index(day) + n_days 
+        n_days = f'{week[d]}, {n_days} days left '
+
+    print (f'{timeconvert_added_h}:{added_m} {ampm} ({n_days})')
+
+
+add_time('12:00', '20:20', 'Monday')
+
